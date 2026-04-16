@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#b91c1c">
+    <meta name="description" content="Cardinal Conclave 2026 - Section E-8 Order of the Arrow event guide for April 17-19, 2026 at Camp Durant, BSA">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Conclave 2026">
+    
+    <title>Cardinal Conclave 2026 Guide</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png">
+    
+    <!-- Standard Icons -->
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overscroll-behavior-y: contain;
+            background: #0a0a0a;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        /* App-like iOS styling */
+        .ios-card {
+            background: #1c1c1e;
+            border-radius: 16px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .ios-list-item {
+            background: #2c2c2e;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .ios-list-item:active {
+            transform: scale(0.98);
+            background: #3a3a3c;
+        }
+        
+        .glass-effect {
+            background: rgba(28, 28, 30, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .map-container {
+            position: relative;
+            overflow: auto;
+            max-height: 600px;
+            background: #2c2c2e;
+            border-radius: 16px;
+        }
+        
+        .map-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .schedule-day {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Gradient backgrounds */
+        .gradient-red {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        }
+        
+        .gradient-orange {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+        }
+        
+        .gradient-yellow {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+        }
+        
+        .gradient-green {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        }
+        
+        /* Lodge totem cards */
+        .lodge-card {
+            background: linear-gradient(135deg, #2c2c2e 0%, #1c1c1e 100%);
+            border: 2px solid #3a3a3c;
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lodge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #dc2626, #ea580c, #eab308);
+        }
+        
+        .lodge-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Totem icon styling */
+        .totem-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3a3a3c;
+            background: #1c1c1e;
+        }
+        
+        /* Enhanced buttons */
+        .app-button {
+            border-radius: 16px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .app-button:active {
+            transform: scale(0.96);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1c1c1e;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a3c;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #48484a;
+        }
+        
+        /* PWA Install Prompt */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-width: 90%;
+            display: none;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .install-prompt.show {
+            display: block;
+        }
+        
+        /* Offline Indicator */
+        .offline-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fbbf24;
+            color: #78350f;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 9999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .offline-indicator.show {
+            transform: translateY(0);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #b91c1c;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Offline Indicator -->
+    <div id="offline-indicator" class="offline-indicator">
+        📡 You're offline - Some features may be limited
+    </div>
+    
+    <!-- Install Prompt -->
+    <div id="install-prompt" class="install-prompt">
+        <div class="flex items-center gap-3">
+            <div class="text-2xl">📱</div>
+            <div class="flex-1">
+                <div class="font-semibold text-gray-900">Install Conclave Guide</div>
+                <div class="text-sm text-gray-600">Add to home screen for offline access</div>
+            </div>
+            <button id="install-button" class="bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                Install
+            </button>
+            <button id="dismiss-install" class="text-gray-500 hover:text-gray-700 ml-2">✕</button>
+        </div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        const scheduleData = {
+            friday: [
+                { time: "2:00 PM", activity: "Check-In Begins", location: "Lodge Campsites" },
+                { time: "4:00 PM - Friday Fellowship", activity: "Ping Pong", location: "Grand Lodge" },
+                { time: "4:00 PM - Friday Fellowship", activity: "9 Square", location: "Grand Lodge" },
+                { time: "4:00 PM - Friday Fellowship", activity: "Fish Camp", location: "Fish Camp", rainPlan: "Closed" },
+                { time: "4:00 PM - Friday Fellowship", activity: "E-Sports", location: "Sullivan Center" },
+                { time: "5:00 PM", activity: "2027 Conclave Meeting (331)", location: "Grand Lodge" },
+                { time: "6:00 - 8:00 PM", activity: "Floating Supper", location: "Grand Lodge" },
+                { time: "8:30 PM", activity: "Candidate Forum", location: "Activity Field", rainPlan: "Grand Lodge" },
+                { time: "8:30 - 10:30 PM", activity: "Fellowship / Cracker-barrel", location: "Activity Field", rainPlan: "Grand Lodge" },
+                { time: "8:30 PM", activity: "Corn Hole Tournament", location: "Activity Field", rainPlan: "Grand Lodge" },
+                { time: "9:30 PM", activity: "Vigil Rededication", location: "Art Ferguson Circle", rainPlan: "Archery" },
+                { time: "10:15 PM", activity: "Vigil Ceremony Evaluation", location: "Art Ferguson Circle", rainPlan: "Archery" },
+                { time: "10:30 PM", activity: "Council of Chiefs", location: "Boat House" },
+                { time: "11:00 PM", activity: "Taps", location: "N/A" }
+            ],
+            saturday: [
+                { time: "7:00 AM", activity: "Breakfast 1", location: "Dining Hall", note: "Lodges 104, 70, 296" },
+                { time: "8:00 AM", activity: "Breakfast 2", location: "Dining Hall", note: "Lodges 117, 118, 331" },
+                { time: "8:30 AM", activity: "Ceremony Evaluator Meeting", location: "Beech Campsite", rainPlan: "Sullivan Center" },
+                { time: "9:00 AM", activity: "Assembly and Flag Raising", location: "Grand Lodge" },
+                { time: "9:00 AM - 2:00 PM", activity: "Blood Drive", location: "Sullivan Center" },
+                { time: "9:00 AM - 12:00 PM", activity: "Open Shooting", location: "Archery & Shotgun Ranges", rainPlan: "Closed" },
+                { time: "9:00 AM - 12:00 PM", activity: "Open Climbing", location: "Climbing Tower", rainPlan: "Closed" },
+                { time: "9:15 AM - 1:30 PM", activity: "9 Square", location: "Activity Field" },
+                { time: "9:15 AM", activity: "Pre-Ordeal Evaluation", location: "Ceremony Road", rainPlan: "Sullivan Center" },
+                { time: "9:15 AM", activity: "Brotherhood Evaluation", location: "Art Ferguson Ceremony Ring", rainPlan: "Trailblazers" },
+                { time: "9:15 AM - 12:00 PM", activity: "OAX (OA eXperience)", location: "Stem-Sullivan" },
+                { time: "9:15 AM - 12:00 PM", activity: "Service Project", location: "Activity Field", rainPlan: "Trading Post Porch (Pennington)" },
+                { time: "10:00 AM - 12:00 PM", activity: "5v5 Basketball", location: "Basketball Court", rainPlan: "Closed" },
+                { time: "9:15 AM - 1:30 PM", activity: "Ping Pong", location: "Grand Lodge" },
+                { time: "9:15 AM - 1:30 PM", activity: "E-Sports", location: "Sullivan Center" },
+                { time: "9:15 AM - 1:30 PM", activity: "Mountain Biking", location: "Sports Center", rainPlan: "Closed" },
+                { time: "9:15 AM - 1:30 PM", activity: "Fish Camp", location: "Fish Camp" },
+                { time: "10:00 AM - 1:30 PM", activity: "Pinewood Derby", location: "Scoutcraft Shelter", note: "Car Check In 10-11AM, Voting 11PM-12PM, Race 12:15PM-1:30PM" },
+                { time: "11:30 AM - 1:00 PM", activity: "Floating Lunch", location: "Grand Lodge" },
+                { time: "12:00 PM", activity: "Chapter Chief Luncheon", location: "Boat House" },
+                { time: "1:30 PM - 2:30 PM", activity: "Patch Auction", location: "Armstrong" },
+                { time: "2:30 PM", activity: "Quest Events Gathering", location: "Activity Field" },
+                { time: "2:45 PM", activity: "Quest Events", location: "Activity Field" },
+                { time: "4:00 PM", activity: "Section Elections", location: "Activity Field", rainPlan: "Grand Lodge" },
+                { time: "5:30 PM", activity: "Supper 1", location: "Grand Lodge", note: "Lodges 117, 118, 296" },
+                { time: "6:30 PM", activity: "Supper 2", location: "Grand Lodge", note: "Lodges 104, 70, 331" },
+                { time: "6:30 PM", activity: "Council of Chiefs", location: "Boat House" },
+                { time: "8:15 PM", activity: "Pre-Show Gathering", location: "Activity Field", rainPlan: "Grand Lodge" },
+                { time: "8:30 PM", activity: "Saturday Night Show", location: "Activity Field", rainPlan: "Grand Lodge" },
+                { time: "9:20 PM", activity: "Cardnival", location: "Activity Field", rainPlan: "Grand Lodge" }
+            ],
+            sunday: [
+                { time: "7:00 AM", activity: "Breakfast 1", location: "Grand Lodge", note: "Lodges 104, 70, 296" },
+                { time: "8:00 AM", activity: "Breakfast 2", location: "Grand Lodge", note: "Lodges 117, 118, 331" },
+                { time: "8:00 AM", activity: "Lodge Adviser's Breakfast", location: "Grand Lodge Back Porch" },
+                { time: "9:00 AM", activity: "Worship Service", location: "Activity Field", rainPlan: "Grand Lodge" },
+                { time: "9:30 AM", activity: "Closing Ceremony", location: "Activity Field", rainPlan: "Grand Lodge" }
+            ]
+        };
+
+        const locations = [
+            { name: "Grand Lodge", area: "Central", description: "Main meeting hall and dining" },
+            { name: "Activity Field", area: "Central", description: "Outdoor events and ceremonies" },
+            { name: "Sullivan Center", area: "West", description: "Indoor activities, training, and blood drive" },
+            { name: "Fish Camp", area: "North", description: "Waterfront activities" },
+            { name: "Art Ferguson Ceremony Ring", area: "South", description: "Outdoor ceremony location" },
+            { name: "Archery Range", area: "West", description: "Archery activities" },
+            { name: "Shotgun Range", area: "South", description: "Shooting sports" },
+            { name: "Climbing Tower", area: "East", description: "Challenge activities" },
+            { name: "Boat House", area: "Central", description: "Council of Chiefs meetings" },
+            { name: "Trading Post", area: "Central", description: "Supplies and patches" },
+            { name: "Health Lodge", area: "Central", description: "First aid and medical" },
+            { name: "Scoutcraft Shelter", area: "Central", description: "Pinewood Derby location" },
+            { name: "Basketball Court", area: "Central", description: "5v5 basketball games" },
+            { name: "Sports Center", area: "Central", description: "Mountain biking activities" }
+        ];
+
+        const lodges = [
+            { number: "104", name: "Occoneechee", campsite: "Long Leaf", totem: "Thunderbird", color: "#ea580c" },
+            { number: "70", name: "Tsoiotsi Tsogalii", campsite: "Holly", totem: "Red-Tailed Hawk", color: "#b91c1c" },
+            { number: "331", name: "Klahican", campsite: "Persimmon", totem: "Venus Flytrap", color: "#be123c" },
+            { number: "117", name: "Croatan", campsite: "Red Cedar", totem: "Deer", color: "#16a34a" },
+            { number: "118", name: "Wahissa", campsite: "Sassafras", totem: "Peace Pipe", color: "#0284c7" },
+            { number: "296", name: "Nayawin Rar", campsite: "Magnolia", totem: "Night Hawk", color: "#4f46e5" }
+        ];
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('home');
+            const [selectedDay, setSelectedDay] = useState('friday');
+            const [searchQuery, setSearchQuery] = useState('');
+            const [isOnline, setIsOnline] = useState(navigator.onLine);
+            const [updateAvailable, setUpdateAvailable] = useState(false);
+
+            useEffect(() => {
+                // Online/Offline detection
+                const handleOnline = () => setIsOnline(true);
+                const handleOffline = () => setIsOnline(false);
+                
+                window.addEventListener('online', handleOnline);
+                window.addEventListener('offline', handleOffline);
+                
+                // Show offline indicator
+                const offlineIndicator = document.getElementById('offline-indicator');
+                if (!isOnline && offlineIndicator) {
+                    offlineIndicator.classList.add('show');
+                } else if (offlineIndicator) {
+                    offlineIndicator.classList.remove('show');
+                }
+                
+                return () => {
+                    window.removeEventListener('online', handleOnline);
+                    window.removeEventListener('offline', handleOffline);
+                };
+            }, [isOnline]);
+
+            const filterEvents = (events) => {
+                if (!searchQuery) return events;
+                return events.filter(event => 
+                    event.activity.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    event.location.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            };
+
+            return (
+                <div className="min-h-screen bg-black">
+                    {/* Header */}
+                    <header className="gradient-red text-white shadow-2xl sticky top-0 z-50">
+                        <div className="container mx-auto px-4 py-6">
+                            <div className="flex items-center justify-center mb-2">
+                                <img src="lodge-totems/lodge-104.png" alt="E8 Cardinal" className="w-12 h-12 mr-3" style={{filter: 'brightness(0) invert(1)'}} />
+                                <h1 className="text-3xl font-bold text-center">Cardinal Conclave</h1>
+                            </div>
+                            <p className="text-center text-red-100 font-medium">Section E-8 • April 17-19, 2026</p>
+                            <p className="text-center text-sm text-red-200 mt-1">Camp Durant, BSA</p>
+                        </div>
+                    </header>
+
+                    {/* Navigation */}
+                    <nav className="glass-effect border-b border-gray-800 sticky top-[104px] z-40">
+                        <div className="container mx-auto px-4">
+                            <div className="flex overflow-x-auto">
+                                {[
+                                    { id: 'home', label: 'Home', icon: '🏠' },
+                                    { id: 'schedule', label: 'Schedule', icon: '📅' },
+                                    { id: 'map', label: 'Map', icon: '🗺️' },
+                                    { id: 'locations', label: 'Locations', icon: '📍' },
+                                    { id: 'info', label: 'Info', icon: 'ℹ️' }
+                                ].map(tab => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        className={`flex-1 min-w-[100px] py-4 px-4 font-semibold transition-all ${
+                                            activeTab === tab.id
+                                                ? 'text-red-500 border-b-3 border-red-500 bg-gray-900'
+                                                : 'text-gray-400 hover:text-red-400 hover:bg-gray-900'
+                                        }`}
+                                    >
+                                        <span className="mr-2 text-lg">{tab.icon}</span>
+                                        <span className="text-sm">{tab.label}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </nav>
+
+                    {/* Main Content */}
+                    <main className="container mx-auto px-4 py-6 pb-20">
+                        {activeTab === 'home' && (
+                            <div className="space-y-6">
+                                {/* Welcome Card */}
+                                <div className="ios-card p-6 border border-gray-800">
+                                    <h2 className="text-3xl font-bold text-white mb-4">Welcome to Cardinal Conclave!</h2>
+                                    <p className="text-gray-300 mb-4 leading-relaxed">
+                                        Join us for the annual Section E-8 Order of the Arrow Conclave at the beautiful 
+                                        Occoneechee Scout Reservation, Camp Durant. Nearly 1,000 Arrowmen from across North Carolina 
+                                        will gather for a weekend of training, service, fellowship, and brotherhood!
+                                    </p>
+                                    <p className="text-gray-300 mb-4 leading-relaxed">
+                                        Experience shows full of singing, dancing, and spirit; compete in the Quest for the Golden Arrow; 
+                                        enjoy Cardnival's carnival games, snacks, and fellowship; and participate in OAX where exhibitors 
+                                        share their careers, passions, and experiences. The weekend is jam-packed with events, competitions, 
+                                        and non-stop fun!
+                                    </p>
+                                    <div className="grid md:grid-cols-3 gap-4 mt-6">
+                                        <div className="gradient-red p-5 rounded-2xl text-white">
+                                            <div className="text-4xl mb-3">📅</div>
+                                            <h3 className="font-bold text-lg">When</h3>
+                                            <p className="text-sm text-red-100 mt-1">April 17-19, 2026</p>
+                                        </div>
+                                        <div className="gradient-orange p-5 rounded-2xl text-white">
+                                            <div className="text-4xl mb-3">📍</div>
+                                            <h3 className="font-bold text-lg">Where</h3>
+                                            <p className="text-sm text-orange-100 mt-1">Camp Durant, BSA<br/>Occoneechee Scout Reservation</p>
+                                        </div>
+                                        <div className="gradient-yellow p-5 rounded-2xl text-white">
+                                            <div className="text-4xl mb-3">⏰</div>
+                                            <h3 className="font-bold text-lg">Check-In</h3>
+                                            <p className="text-sm text-yellow-100 mt-1">Starts at 2:00 PM Friday</p>
+                                        </div>
+                                    </div>
+                                    <div className="mt-6 bg-gradient-to-r from-blue-900 to-blue-800 p-4 rounded-xl border border-blue-700">
+                                        <p className="text-blue-100 text-sm">
+                                            <strong>Registration:</strong> Opens late 2025. Base fee TBD (includes meals and event patch). 
+                                            Your lodge may add fees for transportation and memorabilia. 
+                                            Visit <a href="https://conclaveregistration.org/section/e8" className="underline text-blue-200">conclaveregistration.org</a> when registration opens!
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Quick Links */}
+                                <div className="ios-card p-6 border border-gray-800">
+                                    <h3 className="text-2xl font-bold text-white mb-5">Quick Access</h3>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        <button
+                                            onClick={() => setActiveTab('schedule')}
+                                            className="gradient-red app-button text-white p-6 rounded-2xl text-left"
+                                        >
+                                            <div className="text-3xl mb-3">📅</div>
+                                            <div className="font-bold text-lg">View Full Schedule</div>
+                                            <div className="text-sm text-red-100 mt-1">All events and activities</div>
+                                        </button>
+                                        <button
+                                            onClick={() => setActiveTab('map')}
+                                            className="gradient-orange app-button text-white p-6 rounded-2xl text-left"
+                                        >
+                                            <div className="text-3xl mb-3">🗺️</div>
+                                            <div className="font-bold text-lg">Camp Map</div>
+                                            <div className="text-sm text-orange-100 mt-1">Find your way around</div>
+                                        </button>
+                                        <button
+                                            onClick={() => setActiveTab('locations')}
+                                            className="gradient-yellow app-button text-white p-6 rounded-2xl text-left"
+                                        >
+                                            <div className="text-3xl mb-3">📍</div>
+                                            <div className="font-bold text-lg">Key Locations</div>
+                                            <div className="text-sm text-yellow-100 mt-1">Important places</div>
+                                        </button>
+                                        <button
+                                            onClick={() => setActiveTab('info')}
+                                            className="gradient-green app-button text-white p-6 rounded-2xl text-left"
+                                        >
+                                            <div className="text-3xl mb-3">ℹ️</div>
+                                            <div className="font-bold text-lg">Event Info</div>
+                                            <div className="text-sm text-green-100 mt-1">Lodges & details</div>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Main Programs */}
+                                <div className="bg-white rounded-lg shadow-md p-6">
+                                    <h3 className="text-xl font-bold text-gray-800 mb-4">Main Programs</h3>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        <div className="border-l-4 border-red-500 pl-4">
+                                            <div className="font-semibold text-gray-900">🏆 Quest for the Golden Arrow</div>
+                                            <div className="text-sm text-gray-600 mt-1">The most anticipated lodge competition games</div>
+                                        </div>
+                                        <div className="border-l-4 border-orange-500 pl-4">
+                                            <div className="font-semibold text-gray-900">🎭 Shows</div>
+                                            <div className="text-sm text-gray-600 mt-1">Friday fellowship, Saturday night show, Sunday closing ceremony</div>
+                                        </div>
+                                        <div className="border-l-4 border-yellow-500 pl-4">
+                                            <div className="font-semibold text-gray-900">🎪 Cardnival</div>
+                                            <div className="text-sm text-gray-600 mt-1">Saturday night carnival with games and fellowship</div>
+                                        </div>
+                                        <div className="border-l-4 border-green-500 pl-4">
+                                            <div className="font-semibold text-gray-900">⚡ Spirit Games</div>
+                                            <div className="text-sm text-gray-600 mt-1">Lodge spirit competitions throughout the weekend</div>
+                                        </div>
+                                        <div className="border-l-4 border-blue-500 pl-4">
+                                            <div className="font-semibold text-gray-900">📚 OAX (OA eXperience)</div>
+                                            <div className="text-sm text-gray-600 mt-1">Exhibitors share careers, passions, and experiences</div>
+                                        </div>
+                                        <div className="border-l-4 border-purple-500 pl-4">
+                                            <div className="font-semibold text-gray-900">🎯 REC (Recreation Events & Competitions)</div>
+                                            <div className="text-sm text-gray-600 mt-1">Sports, games, patch auction, and competitions</div>
+                                        </div>
+                                        <div className="border-l-4 border-pink-500 pl-4">
+                                            <div className="font-semibold text-gray-900">🔥 ICE (Inductions & Ceremonies Evaluations)</div>
+                                            <div className="text-sm text-gray-600 mt-1">Pre-Ordeal, Brotherhood, and Vigil ceremony evaluations</div>
+                                        </div>
+                                        <div className="border-l-4 border-teal-500 pl-4">
+                                            <div className="font-semibold text-gray-900">🤝 Service Project</div>
+                                            <div className="text-sm text-gray-600 mt-1">Give back to Camp Durant through cheerful service</div>
+                                        </div>
+                                        <div className="border-l-4 border-indigo-500 pl-4">
+                                            <div className="font-semibold text-gray-900">🗳️ Section Elections</div>
+                                            <div className="text-sm text-gray-600 mt-1">Saturday 4:00 PM - Elect next year's section officers</div>
+                                        </div>
+                                        <div className="border-l-4 border-red-400 pl-4">
+                                            <div className="font-semibold text-gray-900">🎉 Friday Night Fellowship</div>
+                                            <div className="text-sm text-gray-600 mt-1">Cracker-barrel, corn hole tournament, and fellowship</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'schedule' && (
+                            <div className="space-y-4">
+                                {/* Search Bar */}
+                                <div className="bg-white rounded-lg shadow-md p-4">
+                                    <input
+                                        type="text"
+                                        placeholder="Search events or locations..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    />
+                                </div>
+
+                                {/* Day Selector */}
+                                <div className="bg-white rounded-lg shadow-md p-2 flex gap-2">
+                                    {[
+                                        { id: 'friday', label: 'Friday, April 17' },
+                                        { id: 'saturday', label: 'Saturday, April 18' },
+                                        { id: 'sunday', label: 'Sunday, April 19' }
+                                    ].map(day => (
+                                        <button
+                                            key={day.id}
+                                            onClick={() => setSelectedDay(day.id)}
+                                            className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
+                                                selectedDay === day.id
+                                                    ? 'bg-red-600 text-white'
+                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                            }`}
+                                        >
+                                            {day.label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Schedule Events */}
+                                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                                    <div className="divide-y divide-gray-200">
+                                        {filterEvents(scheduleData[selectedDay]).map((event, index) => (
+                                            <div key={index} className="p-4 hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-start justify-between">
+                                                    <div className="flex-1">
+                                                        <div className="flex items-center gap-2 mb-1">
+                                                            <span className="text-red-600 font-semibold">{event.time}</span>
+                                                            {event.note && (
+                                                                <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">
+                                                                    {event.note}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <h4 className="font-semibold text-gray-900 text-lg">{event.activity}</h4>
+                                                        <div className="flex items-center gap-1 text-gray-600 mt-1">
+                                                            <span className="text-sm">📍</span>
+                                                            <span className="text-sm">{event.location}</span>
+                                                        </div>
+                                                        {event.rainPlan && (
+                                                            <div className="flex items-center gap-1 text-blue-600 mt-1">
+                                                                <span className="text-sm">☔</span>
+                                                                <span className="text-sm">Rain Plan: {event.rainPlan}</span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'map' && (
+                            <div className="space-y-4">
+                                <div className="bg-white rounded-lg shadow-md p-6">
+                                    <h2 className="text-2xl font-bold text-red-700 mb-4">Camp Durant Map</h2>
+                                    <p className="text-gray-600 mb-4">
+                                        Occoneechee Scout Reservation - Navigate the camp and find key locations
+                                    </p>
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                        <p className="text-sm text-blue-800">
+                                            📱 <strong>Tip:</strong> Download the map PDF from the uploaded files for better detail and offline access.
+                                        </p>
+                                    </div>
+                                    <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                        <h3 className="font-semibold text-blue-900 mb-2">📌 Key Areas</h3>
+                                        <ul className="text-sm text-blue-800 space-y-1">
+                                            <li>• <strong>ICE:</strong> Check-in and registration area (marked on map)</li>
+                                            <li>• <strong>Grand Lodge:</strong> Main dining and meetings (central red area)</li>
+                                            <li>• <strong>Activity Field:</strong> Saturday night show and Quest events</li>
+                                            <li>• <strong>Lodge Campsites:</strong> Numbered areas (104, 117, 118, 70, 296, 331)</li>
+                                            <li>• <strong>Art Ferguson Ceremony Ring:</strong> South area for ceremonies</li>
+                                            <li>• <strong>Nello Teer Lake:</strong> Waterfront area with Fish Camp</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'locations' && (
+                            <div className="space-y-4">
+                                <div className="bg-white rounded-lg shadow-md p-6">
+                                    <h2 className="text-2xl font-bold text-red-700 mb-4">Key Locations</h2>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        {locations.map((location, index) => (
+                                            <div key={index} className="border border-gray-200 rounded-lg p-4 hover:border-red-300 transition-colors">
+                                                <div className="flex items-start justify-between">
+                                                    <div className="flex-1">
+                                                        <h3 className="font-semibold text-gray-900 text-lg">{location.name}</h3>
+                                                        <p className="text-sm text-gray-600 mt-1">{location.description}</p>
+                                                        <span className="inline-block mt-2 text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
+                                                            {location.area} Area
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Important Notes */}
+                                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                    <h3 className="font-semibold text-yellow-900 mb-2">⚠️ Important Notes</h3>
+                                    <ul className="text-sm text-yellow-800 space-y-1">
+                                        <li>• Check-in begins at 2:00 PM Friday at your lodge campsite</li>
+                                        <li>• Health Lodge is available for medical needs throughout the event</li>
+                                        <li>• Weather-dependent activities may be cancelled - check rain plans</li>
+                                        <li>• Trading Post for patches and supplies near Pennington</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'info' && (
+                            <div className="space-y-4">
+                                <div className="ios-card p-6 border border-gray-800">
+                                    <h2 className="text-3xl font-bold text-white mb-3">Participating Lodges</h2>
+                                    <p className="text-gray-400 mb-6">Six lodges of Section E-8 gathering for fellowship and service</p>
+                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                                        {lodges.map((lodge, index) => (
+                                            <div key={index} className="lodge-card">
+                                                <div className="flex items-start gap-4">
+                                                    <img 
+                                                        src={`lodge-totems/lodge-${lodge.number}.png`} 
+                                                        alt={`${lodge.name} totem`}
+                                                        className="totem-icon flex-shrink-0"
+                                                        style={{borderColor: lodge.color}}
+                                                    />
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="text-2xl font-bold mb-1" style={{color: lodge.color}}>
+                                                            Lodge #{lodge.number}
+                                                        </div>
+                                                        <div className="text-lg font-semibold text-white mb-1">
+                                                            {lodge.name}
+                                                        </div>
+                                                        <div className="text-sm text-gray-400 mb-2">
+                                                            Totem: {lodge.totem}
+                                                        </div>
+                                                        <div className="text-sm text-gray-500 flex items-center gap-1">
+                                                            <span>📍</span>
+                                                            <span>{lodge.campsite}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Meal Times */}
+                                <div className="bg-white rounded-lg shadow-md p-6">
+                                    <h3 className="text-xl font-bold text-gray-800 mb-4">🍽️ Meal Schedule</h3>
+                                    <div className="space-y-4">
+                                        <div className="border-l-4 border-red-500 pl-4">
+                                            <h4 className="font-semibold text-gray-900">Group 1 (Lodges 104, 70, 296)</h4>
+                                            <ul className="text-sm text-gray-600 mt-2 space-y-1">
+                                                <li>• Saturday Breakfast: 7:00 AM</li>
+                                                <li>• Saturday Lunch: 11:30 AM - 1:00 PM (Floating)</li>
+                                                <li>• Saturday Supper: 6:30 PM</li>
+                                                <li>• Sunday Breakfast: 7:00 AM</li>
+                                            </ul>
+                                        </div>
+                                        <div className="border-l-4 border-orange-500 pl-4">
+                                            <h4 className="font-semibold text-gray-900">Group 2 (Lodges 117, 118, 331)</h4>
+                                            <ul className="text-sm text-gray-600 mt-2 space-y-1">
+                                                <li>• Saturday Breakfast: 8:00 AM</li>
+                                                <li>• Saturday Lunch: 11:30 AM - 1:00 PM (Floating)</li>
+                                                <li>• Saturday Supper: 5:30 PM</li>
+                                                <li>• Sunday Breakfast: 8:00 AM</li>
+                                            </ul>
+                                        </div>
+                                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4">
+                                            <p className="text-sm text-blue-800">
+                                                <strong>Note:</strong> Saturday lunch is "floating" - served from 11:30 AM to 1:00 PM at Grand Lodge. Come when convenient during this window!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* What to Bring */}
+                                <div className="bg-white rounded-lg shadow-md p-6">
+                                    <h3 className="text-xl font-bold text-gray-800 mb-4">🎒 What to Bring</h3>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 mb-2">Essentials</h4>
+                                            <ul className="text-sm text-gray-600 space-y-1">
+                                                <li>✓ Scout uniform (Class A/B) and OA sash</li>
+                                                <li>✓ Sleeping bag and pad</li>
+                                                <li>✓ Tent (if not provided)</li>
+                                                <li>✓ Personal hygiene items</li>
+                                                <li>✓ Flashlight/headlamp</li>
+                                                <li>✓ Water bottle</li>
+                                                <li>✓ Rain gear</li>
+                                                <li>✓ Insect repellent</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 mb-2">Optional</h4>
+                                            <ul className="text-sm text-gray-600 space-y-1">
+                                                <li>✓ Trading patches</li>
+                                                <li>✓ Money (for trading post and memorabilia)</li>
+                                                <li>✓ Lodge theme costume (for Spirit Award!)</li>
+                                                <li>✓ Camp chair</li>
+                                                <li>✓ Camera</li>
+                                                <li>✓ Musical instruments (campfire)</li>
+                                                <li>✓ Sports equipment</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Spirit Award Info */}
+                                <div className="bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-lg p-6">
+                                    <h3 className="text-xl font-bold text-red-800 mb-3">🏆 Spirit Award Competition</h3>
+                                    <p className="text-gray-700 mb-3">
+                                        Every year, each lodge chooses a theme to dress up as for Conclave. Bringing great spirit, 
+                                        dressing in your lodge's theme, and showing enthusiasm throughout the weekend helps your 
+                                        lodge compete for the coveted Spirit Award!
+                                    </p>
+                                    <p className="text-sm text-gray-600 italic">
+                                        Check with your lodge leadership about this year's theme and come prepared to show your spirit!
+                                    </p>
+                                </div>
+
+                                {/* Contact Info */}
+                                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                    <h3 className="font-semibold text-blue-900 mb-2">📞 Contact Information</h3>
+                                    <p className="text-sm text-blue-800">
+                                        For questions or assistance during the event, contact Section E-8 staff at your lodge campsite 
+                                        or visit the Admin Building. More info at <a href="https://e8.oa-scouting.org" className="underline">e8.oa-scouting.org</a>
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-gray-800 text-white py-6 mt-12">
+                        <div className="container mx-auto px-4 text-center">
+                            <p className="text-lg font-semibold">Wimachtendienk Wingolauchsik Witahemui</p>
+                            <p className="text-sm text-gray-400 mt-2">Brotherhood of Cheerful Service</p>
+                            <p className="text-xs text-gray-500 mt-4">Section E-8 • Order of the Arrow • BSA</p>
+                            {!isOnline && (
+                                <p className="text-xs text-yellow-400 mt-2">📡 Offline Mode Active</p>
+                            )}
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registered:', registration);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available
+                                    if (confirm('New version available! Reload to update?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(err => console.log('ServiceWorker registration failed:', err));
+            });
+        }
+        
+        // iOS install prompt
+        let deferredPrompt;
+        const installPrompt = document.getElementById('install-prompt');
+        const installButton = document.getElementById('install-button');
+        const dismissButton = document.getElementById('dismiss-install');
+        
+        // For iOS, show instructions after a delay
+        if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.navigator.standalone) {
+            setTimeout(() => {
+                if (!localStorage.getItem('installDismissed')) {
+                    installPrompt.classList.add('show');
+                    installButton.textContent = 'Got it!';
+                    installButton.onclick = () => {
+                        installPrompt.classList.remove('show');
+                        localStorage.setItem('installDismissed', 'true');
+                    };
+                }
+            }, 3000);
+        }
+        
+        // For Android/Desktop
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            if (!localStorage.getItem('installDismissed')) {
+                installPrompt.classList.add('show');
+            }
+        });
+        
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+            }
+            installPrompt.classList.remove('show');
+            localStorage.setItem('installDismissed', 'true');
+        });
+        
+        dismissButton.addEventListener('click', () => {
+            installPrompt.classList.remove('show');
+            localStorage.setItem('installDismissed', 'true');
+        });
+    </script>
+</body>
+</html>
